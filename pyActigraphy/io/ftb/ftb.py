@@ -239,7 +239,8 @@ class RawFTB(BaseRaw):
         return baseline
 
 def read_raw_ftb(
-    path_to_fitbit,
+    path_to_fitbit=None,
+    preloaded_data=None,
     start_time=None,
     period=None,
     name=None
@@ -248,8 +249,12 @@ def read_raw_ftb(
 
     Parameters
     ----------
-    path_to_fitbit: str
-        Path to the folder structure from Fitbit download (.../Fitbit/...).
+    path_to_fitbit: str, optional
+        Path to the folder structure from Fitbit download (.../Fitbit/...). Must be provided if no preloaded data is provided.
+        Default is None.
+    preloaded_data: pd.DataFrame, optional
+        Preloaded Fitbit data. Must contain columns 'calories' and 'heart'.
+        Default is None.
     start_time: datetime-like str
         If not None, the start_time will be used to slice the data.
         Default is None.
@@ -268,6 +273,7 @@ def read_raw_ftb(
 
     return RawFTB(
         path_to_fitbit=path_to_fitbit,
+        preloaded_data=None,
         start_time=start_time,
         period=period,
         name=name
